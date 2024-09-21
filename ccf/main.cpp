@@ -4,6 +4,81 @@ using namespace std;
 
 int main()
 {
+    int n,l,s;
+    cin>>n>>l>>s;
+    vector<vector<int>>a(l+1,vector<int>(l+1));
+    int w[n][2];
+    for(int i=0;i<n;i++)
+    {
+        cin>>w[i][0]>>w[i][1];
+        a[w[i][0]][w[i][1]]=1;
+    }
+    int num=0;
+    vector<vector<int>>b(s+1,vector<int>(s+1));
+    
+    for(int i=s;i>=0;i--)
+    {
+        for(int j=0;j<=s;j++)
+        {
+            cin>>b[i][j];
+        }
+    }
+    for(int i=0;i<n;i++)
+    {
+        if(w[i][0]<=l-s&&w[i][1]<=l-s)
+        {
+            int flag=0;
+            for(int k=0;k<=s;k++)
+            {
+                for(int p=0;p<=s;p++)
+                {
+                    if(b[k][p]!=a[w[i][0]+k][w[i][1]+p])
+                    {
+                        flag=1;
+                        break;
+                    }
+                }
+                if(flag)
+                break;
+            }
+            if(!flag)
+            num++;
+        }
+    }
+    cout<<num;
+    return 0;
+}
+
+int main2022061()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0),cout.tie(0);
+    int n;
+    cin>>n;
+    vector<int>a(n);
+    double b=0,d=0;
+    for(int i=0;i<n;i++)
+    {
+        cin>>a[i];
+        b+=a[i];
+    }
+    b/=n;
+    vector<double>f(n);
+    for(int i=0;i<n;i++)
+    {
+        d+=pow(a[i]-b,2);
+    }
+    d/=n;
+    for(int i=0;i<n;i++)
+    {
+        f[i]=(a[i]-b)/sqrt(d);
+        cout<<fixed<<setprecision(16)<<f[i]<<endl;
+    }
+    return 0;
+}
+
+int main2022092()
+{
     int n,x,sum=0;
     cin>>n>>x;
     vector<int>a(n+1);
